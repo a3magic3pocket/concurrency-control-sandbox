@@ -1,0 +1,17 @@
+- 주요 변경 사항
+    - optimistic lock의 timeout을 20초로 설정
+--
+- pessimistic lock 설정
+    - timeout: 5초
+    - 격리수준(isolation level): REPEATABLE_READ
+- optimistic lock 설정
+    - timeout: 20초
+    - 격리수준: REPEATABLE_READ
+    - OptimisticLockingFailureException 발생 시 최대 허용 재시도 수: 30
+    - OptimisticLockingFailureException 발생 시 대기시간: 0.1초
+- 단일 스레드, 비동기 배치 처리 설정
+    - DB timeout: 5초
+    - DB 격리수준: REPEATABLE_READ
+    - 비동기 배치 함수 배치 크기: 20개
+    - 비동기 배치 함수가 담긴 스프링 스케쥴러 fixedDelay: 0.1초
+        - fixedDelay는 이전 작업이 완료된 후 재시도 하기 전까지 대기 시간

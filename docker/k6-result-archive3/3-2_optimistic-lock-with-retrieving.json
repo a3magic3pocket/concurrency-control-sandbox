@@ -1,0 +1,51 @@
+{
+  "http_req_failed": {
+    "thresholds": {
+      "rate>=0": {
+        "ok": true
+      }
+    },
+    "type": "rate",
+    "contains": "default",
+    "values": {
+      "fails": 6000,
+      "rate": 0,
+      "passes": 0
+    }
+  },
+  "http_reqs": {
+    "thresholds": {
+      "rate>=0": {
+        "ok": true
+      }
+    },
+    "type": "counter",
+    "contains": "default",
+    "values": {
+      "count": 6000,
+      "rate": 119.99191591903973
+    }
+  },
+  "state": {
+    "isStdOutTTY": false,
+    "isStdErrTTY": false,
+    "testRunDurationMs": 50003.368594
+  },
+  "http_req_duration": {
+    "type": "trend",
+    "contains": "time",
+    "values": {
+      "med": 731.376428,
+      "max": 3946.548453,
+      "p(90)": 1510.9799249000002,
+      "p(95)": 1844.9767429000005,
+      "avg": 818.4720920211691,
+      "min": 4.69591
+    },
+    "thresholds": {
+      "max>=0": {
+        "ok": true
+      }
+    }
+  }
+}

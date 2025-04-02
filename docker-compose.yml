@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  web:
+    image: amazoncorretto:21-alpine3.20
+    container_name: web
+    restart: always
+    ports:
+      - "8080:8080"
+    user: "root"
+    volumes:
+      - ./build/libs/demo-0.0.1-SNAPSHOT.jar:/demo.jar
+    command:
+      - "java"
+      - "-jar"
+      - "/demo.jar"
+      - "--spring.datasource.url=jdbc:mariadb://db:3306/concurrency"
+      - "--spring.data.redis.host=redis"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    image: mariadb:lts-noble
+    container_name: db
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: my-mariadb-root-password
+    volumes:
+      - ./db:/var/lib/mysql
+    user: '501:20'
+    networks:
+      - app-network
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    user: '501:20'
+    volumes:
+      - ./redis:/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
